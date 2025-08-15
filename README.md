@@ -56,34 +56,34 @@ Dashboard Development – Built interactive Power BI dashboard with slicers, too
 
 ## SQL Queries
 ### Month on Month Percentage Increase in Sales
-SELECT 
-    MONTH(transaction_date) AS MONTH,
-    ROUND(SUM(transaction_qty*unit_price)) AS TOTAL_SALES,
-    ROUND((SUM(transaction_qty*unit_price) - LAG(SUM(transaction_qty*unit_price),1) OVER (ORDER BY MONTH(transaction_date)))/
-    LAG(SUM(transaction_qty*unit_price), 1) OVER (ORDER BY MONTH(transaction_date))*100,2) AS MOM_INCREASE_PERCENTAGE
-FROM 
-    coffeeshopsales
-WHERE 
-    MONTH(transaction_date) IN (4, 5) – (April, May)
-GROUP BY
-    MONTH(transaction_date)
-ORDER BY
-    MONTH(transaction_date);
+SELECT  
+    MONTH(transaction_date) AS MONTH,  
+    ROUND(SUM(transaction_qty*unit_price)) AS TOTAL_SALES,  
+    ROUND((SUM(transaction_qty*unit_price) - LAG(SUM(transaction_qty*unit_price),1) OVER (ORDER BY MONTH(transaction_date)))/  
+    LAG(SUM(transaction_qty*unit_price), 1) OVER (ORDER BY MONTH(transaction_date))*100,2) AS MOM_INCREASE_PERCENTAGE  
+FROM   
+    coffeeshopsales  
+WHERE   
+    MONTH(transaction_date) IN (4, 5) – (April, May)  
+GROUP BY  
+    MONTH(transaction_date)  
+ORDER BY  
+    MONTH(transaction_date);  
 
 ### Calculating Sales on Weekdays and Weekends
-SELECT
-    CASE WHEN DAYOFWEEK(transaction_date) IN (1, 7) THEN 'Weekends'
-    ELSE 'Weekdays'
-    END AS day_type,
-    SUM(unit_price*transaction_qty) AS Total_Sales
-FROM 
-    coffeeshopsales
-WHERE 
-    MONTH(transaction_date) = 5
-GROUP BY
-    CASE WHEN DAYOFWEEK(transaction_date) IN (1, 7) THEN 'Weekends'
-    ELSE 'Weekdays'
-    END
+SELECT  
+    CASE WHEN DAYOFWEEK(transaction_date) IN (1, 7) THEN 'Weekends'  
+    ELSE 'Weekdays'  
+    END AS day_type,  
+    SUM(unit_price*transaction_qty) AS Total_Sales  
+FROM   
+    coffeeshopsales  
+WHERE   
+    MONTH(transaction_date) = 5  
+GROUP BY  
+    CASE WHEN DAYOFWEEK(transaction_date) IN (1, 7) THEN 'Weekends'  
+    ELSE 'Weekdays'  
+    END  
 
 ## Dashboard Preview
 [Link](https://app.powerbi.com/links/kDShy6xa4E?ctid=695626df-d117-4278-b37d-1252e4fd8b07&pbi_source=linkShare)
